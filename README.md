@@ -5,7 +5,7 @@ The goal of this project is to make a simple article recommendation engine using
 
 Around the recommendation engine, you are going to build a web server that displays a list of [BBC](http://mlg.ucd.ie/datasets/bbc.html) articles for URL `http://localhost:5000` (testing) or whatever the IP address is of your Amazon server (deployment):
 
-<img src=figures/articles.png width=200>
+<img src=figures/main_page.png width=400>
 
 Clicking on one of those articles takes you to an article page that shows the text of the article as well as a list of five recommended articles:
 
