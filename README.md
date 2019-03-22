@@ -17,53 +17,43 @@ Clicking on one of those articles takes you to an article page that shows the te
 
 Creating a server that has all the appropriate software can be tricky so I have recorded a sequence that works for me.
 
-The first thing is to launch a server with different software than the simple  Amazon linux we have been using in class. We need one that has, for example, `numpy` and friends so let's use an *image* (snapshot of a disk with a bunch of stuff installed) that already has machine learning software installed: Use "*Deep Learning AMI Amazon Linux Version 3.1_Sep2017 - ami-bde90fc7*" (DAMN: this has disappeared. working on solution 9/20/2018). Ok, so grab the basic linux image and then install Anaconda:
+Creating a server that has all the appropriate software can be tricky so I have recorded a sequence that works for me.
+
+The first thing is to launch a server with different software than the simple Amazon linux. We need one that has, for example, `numpy` and friends so let's use an *image* (snapshot of a disk with a bunch of stuff installed) that already has machine learning software installed: Use "*Ubuntu Server 16.04 LTS (HVM), SSD Volume Type*":
+
+Create a `t2.medium` size computer (in Oregon; it's cheaper)!
+
+When you try to connect, it will tell you to use user `root` but use `ec2-user` like we did for the other machines.  In other words, here's how I login:
 
 ```bash
-wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+$ ssh -i "mykey.pem" ec2-user@34.203.194.19
 ```
 
-(Or whatever the latest version is). Then execute that script to install:
-
-```bash
-bash Anaconda3-5.2.0-Linux-x86_64.sh
-```
+Once connected to AWS, we need to install anaconda:
 
 Or, another student had good luck with the following process:
 
-Use an `ubuntu` server, which already comes with python3; so just do:
+Then install software we need:
 
 ```
 sudo apt update
-sudo apt install python3-pip unzip
-pip3 install numpy gunicorn Flask
+sudo apt install python3-pip
+sudo apt install unzip
 ```
+Then we can begin to intall the Python packages we need:
 
-The other change is that for ubuntu server the user is *ubuntu* instead of *ec2-user*.
-
-Create a `t2.medium` size computer (in Oregon; it's cheaper)!  The cost is 0.047 dollars per Hour, which is only 1.12 dollars per day.
-
-When you try to connect, it will tell you to use user `root` but use `ec2-user` like we did for the other machines.  In other words, here's how I login:
- 
-```bash
-$ ssh -i "parrt.pem" ec2-user@34.203.194.19
 ```
-
-Then install software we need:
-
-```bash
-sudo pip install flask
-sudo pip install gunicorn
-sudo yum install -y p7zip.x86_64
-sudo cp /usr/bin/7za /usr/bin/7z
+pip3 install numpy
+pip3 install gunicorn
+pip3 install flask
 ```
 
 Now, clone your repository into the home directory:
 
 ```bash
 cd ~
-git clone https://github.com/USF-MSDS692/recommender-parrt.git
-cd recommender-parrt
+git clone https://github.com/JialiangShi/article-recommender.git
+cd article-recommender
 ```
 
 Now, download the data you need and unzip:
